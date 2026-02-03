@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
     "prod": "node src/index.js",
-    "db:generate": "npx prisma migrate dev --name init --create-only",
-    "db:migrate": "npx prisma migrate dev --name init"
+    "db:init": "npx prisma migrate dev --name init",
+    "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate dev "
   },
   "keywords": [],
   "author": "",

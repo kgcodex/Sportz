@@ -12,7 +12,7 @@ enum MatchStatus {
   finished
 }
 
-model Matches {
+model Match {
   id        Int         @id @default(autoincrement())
   sport     String
   homeTeam  String      @map("home_team")
@@ -24,12 +24,12 @@ model Matches {
   awayScore Int         @default(0) @map("away_score")
   createdAt DateTime    @default(now()) @map("created_at")
 
-  commentry Commentry[]
+  commentry Commentary[]
 
-  @@map("matches")
+  @@map("match")
 }
 
-model Commentry {
+model Commentary {
   id        Int      @id @default(autoincrement())
   matchId   Int      @map("match_id")
   minute    Int?
@@ -43,7 +43,8 @@ model Commentry {
   tags      String[]
   createdAt DateTime @default(now()) @map("created_at")
 
-  match Matches @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
 
-  @@map("commentry")
+  @@map("commentary")
+  @@index([matchId])
 }
