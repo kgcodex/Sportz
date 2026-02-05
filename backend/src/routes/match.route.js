@@ -48,22 +48,20 @@ matchRouter.post("/", async (req, res) => {
     });
   }
   try {
-    const user = await prisma.match.create({
+    const match = await prisma.match.create({
       data: {
         ...parsed.data,
-        startTime: new Date(parsed.data.startTime),
-        endTime: new Date(parsed.data.endTime),
+        startTime: parsed.data.startTime,
+        endTime: parsed.data.endTime,
         homeScore: parsed.data.homeScore ?? 0,
         awayScore: parsed.data.awayScore ?? 0,
         status: getMatchStatus(parsed.data.startTime, parsed.data.endTime),
       },
     });
 
-    res.status(201).json({ data: user });
+    res.status(201).json({ data: match });
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({ error: "Failed to create match.", details: JSON.stringify(err) });
+    res.status(500).json({ error: "Failed to create match." });
   }
 });

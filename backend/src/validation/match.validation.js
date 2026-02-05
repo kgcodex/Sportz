@@ -25,8 +25,8 @@ export const createMatchSchema = z
     awayScore: z.coerce.number().int().nonnegative().optional(),
   })
   .superRefine((data, ctx) => {
-    const start = new Date(data.startTime);
-    const end = new Date(data.endTime);
+    const start = data.startTime;
+    const end = data.endTime;
     if (end <= start) {
       ctx.addIssue({
         code: "custom",
