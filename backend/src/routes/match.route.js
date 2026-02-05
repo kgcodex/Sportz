@@ -59,6 +59,10 @@ matchRouter.post("/", async (req, res) => {
       },
     });
 
+    if (res.app.locals.broadcastMatchCreated) {
+      res.app.locals.broadcastMatchCreated(match);
+    }
+
     res.status(201).json({ data: match });
   } catch (err) {
     console.log(err);

@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 export const PORT = process.env.PORT;
+export const HOST = process.env.HOST;
 export const DB_URL = process.env.DATABASE_URL;
 
 if (!DB_URL) {
